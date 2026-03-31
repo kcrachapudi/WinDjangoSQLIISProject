@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +26,7 @@ SECRET_KEY = 'django-insecure-5(^)e9=z6(5hyl!4z!zbn9wz#h0u1&hw(^6d^6gcl5e24)sk_$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -77,14 +77,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'WorkflowDB',
+        'USER': 'django_user',
+        'PASSWORD': 'YourStrongPassword123!',
         'HOST': 'localhost',
+        'PORT': '',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
-            'trusted_connection': 'yes',
         },
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -119,4 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# Static files — IIS will serve these directly
+# Folder where collectstatic will put all files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'

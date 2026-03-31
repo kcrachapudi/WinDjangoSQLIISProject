@@ -1,9 +1,14 @@
 <h2>Create Request</h2>
-
 <form method="post">
     {% csrf_token %}
-    Title: <input type="text" name="title"><br>
-    Description: <input type="text" name="description"><br>
-    Status: <input type="text" name="status"><br>
+    <label>Title:</label> <input type="text" name="title"><br>
+    <label>Description:</label> <textarea name="description"></textarea><br>
+    <label>Status:</label>
+    <select name="status">
+        <option>Not Started</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+    </select><br>
     <button type="submit">Save</button>
 </form>
+<a href="{% url 'request_list' %}">Back to list</a>

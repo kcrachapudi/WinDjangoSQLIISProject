@@ -1,0 +1,14 @@
+<h2>Edit Request</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Title:</label> <input type="text" name="title" value="{{ request_obj.title }}"><br>
+    <label>Description:</label> <textarea name="description">{{ request_obj.description }}</textarea><br>
+    <label>Status:</label>
+    <select name="status">
+        <option {% if request_obj.status == "Not Started" %}selected{% endif %}>Not Started</option>
+        <option {% if request_obj.status == "In Progress" %}selected{% endif %}>In Progress</option>
+        <option {% if request_obj.status == "Completed" %}selected{% endif %}>Completed</option>
+    </select><br>
+    <button type="submit">Update</button>
+</form>
+<a href="{% url 'request_list' %}">Back to list</a>
